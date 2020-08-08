@@ -1,7 +1,8 @@
 import app from './app';
 import path from 'path';
-process.env.NODE_CONFIG_DIR = path.join(__dirname, "/../../config/");
+process.env.NODE_CONFIG_DIR = path.join(__dirname, "/../config/");
 import config from 'config';
+import mongoose from 'mongoose';
 
 let environment: string | undefined = process.env.NODE_ENV;
 let port: number;

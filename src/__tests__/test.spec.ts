@@ -4,13 +4,20 @@ import http from 'http';
 import path from 'path';
 process.env.NODE_CONFIG_DIR = path.join(__dirname, "/../../config/");
 import config from 'config';
+import mongoose from 'mongoose';
 
 describe("Test endpoint", () => {
 	let server: http.Server;
 	let port: number;
 
-	beforeAll(() => {
-		port = config.get("port") || 5001;
+	beforeAll(async () => {
+		try {
+			port = config.get("port") || 5001;
+			const url:string = config.get("dbUri");
+			await mongoose.connect(url, { useNewUrlParser: true });
+		} catch (ex) {
+			console.error(ex);
+		}
 	});
 
 	beforeEach((done) => {
